@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadmus — CodeWord Steering Lens</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap');
+  :root{ --bg:#0b0d11; --panel:#12151b; --amber:#d9a441; --amber-hi:#f0c06a; --amber-dim:#8a6b2e;
+    --text:#dfe3ea; --dim:#828a99; --border:rgba(217,164,65,0.16); }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;line-height:1.6;font-size:14px}
+  .wrap{max-width:860px;margin:0 auto;padding:40px 22px 90px}
+  .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+  h1{font-family:Newsreader,serif;font-weight:500;font-size:clamp(24px,4vw,34px);margin:0 0 8px;color:var(--amber-hi)}
+  .sub{max-width:70ch;font-size:15px;color:var(--text);font-family:Newsreader,serif}
+  .byline{font-size:11px;color:var(--dim);margin:14px 0 0;letter-spacing:.06em}
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin:0 0 12px;font-weight:600}
+  section{margin:36px 0 0;padding:20px 22px;border:1px solid var(--border);border-radius:3px;background:rgba(217,164,65,0.02)}
+  pre{font-size:11.5px;line-height:1.55;color:#c9d0dc;background:#08090c;border:1px solid var(--border);border-radius:3px;
+    padding:16px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;max-height:460px;overflow-y:auto}
+  button{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--bg);background:var(--amber);border:none;
+    padding:8px 14px;border-radius:3px;cursor:pointer;letter-spacing:.03em}
+  button:hover{background:var(--amber-hi)}
+  .copybar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  input[type=text]{background:#08090c;border:1px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;padding:8px 10px;border-radius:3px;width:100%;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th{text-align:left;color:var(--amber);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;padding:6px 8px;border-bottom:1px solid var(--border)}
+  td{padding:7px 8px;border-bottom:1px solid rgba(217,164,65,0.06);vertical-align:top}
+  td.grp{color:var(--dim)}
+  td.cw{color:var(--amber-hi)}
+  .vh{font-size:12.5px;color:var(--text)} .vh .v{color:var(--amber-hi)} .vh li{margin-bottom:8px}
+  footer{margin:44px 0 0;color:var(--dim);font-size:11.5px}
+  footer a,section a{color:var(--amber)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tag">Prompt Library · Steering</div>
+  <h1>Cadmus</h1>
+  <p class="sub">CodeWord Steering Lens. One-word (or stacked) commands, placed at the top of a message, that instantly transform any input — no long explanations needed every time. <code>sum + list + todo: [paste text]</code> — stackable, processed left to right.</p>
+  <p class="byline">Co-authored: David Lee Wise (ROOT0) · AVAN — v1.2</p>
+
+  <section>
+    <h2>The 20 codewords (live filter)</h2>
+    <input type="text" id="filter" placeholder="filter (e.g. 'tone', 'sum', 'brainstorm')...">
+    <table id="cwtable"></table>
+  </section>
+
+  <section>
+    <div class="copybar"><h2 style="margin:0">The prompt (copy-paste ready)</h2><button id="copyBtn">copy</button></div>
+    <pre id="spec"></pre>
+  </section>
+
+  <section>
+    <h2>How to use it</h2>
+    <p style="font-size:13px;margin:0">Paste the block above as your first message in any fresh chat. Then send your actual request prefixed with one or more codewords and a colon: <code>critique + punch-up: [your draft]</code>. Unrecognized codeword → Cadmus lists the 20 rather than failing silently. Task-scoped only — no persistence, no memory beyond the current thread, and it cannot override the host model's safety rules.</p>
+  </section>
+
+  <section>
+    <h2>Version history</h2>
+    <ul class="vh">
+      <li><span class="v">v1.0</span> — "birth certificate": named, scoped (task-only, no persistence, no safety override), no formal codeword library yet defined.</li>
+      <li><span class="v">v1.2</span> — full 20-command library, grouped into 4 categories (compression, structure, tone, creative), stacking rule, unrecognized-codeword fallback.</li>
+    </ul>
+    <p style="font-size:12px;color:var(--dim);margin-top:10px">Two documented iterations — the weight carried into az1's asteroid belt.</p>
+  </section>
+
+  <section>
+    <h2>AVAN's inverse companion</h2>
+    <p style="font-size:13px;margin:0">Cadmus works because the steering is explicit — a named, declared command sitting in plain sight at the top of the message. But most responses, most of the time, carry no codeword at all. That's not neutral; it's just unlabeled. <a href="https://davidwise01.github.io/mumei/">無銘 · Mumei</a> ("unsigned") looks at what actually shapes a response when nobody hands it a lens.</p>
+  </section>
+
+  <footer>
+    <p>ROOT0 / TriPod LLC + AVAN. Task-scoped steering lens, not a persistent agent. LACUNA · az1 corpus, weighted asteroid (papers belt), 2.</p>
+  </footer>
+</div>
+
+<script>
+const GROUPS = [
+  {g:"Compression & Clarity", cmds:[
+    ["summarize / sum","short summary + bullets"],
+    ["key-points / kp","main ideas only"],
+    ["simplify / plain","plain language, no jargon"],
+    ["eli10","explain like I'm 10"],
+    ["tighten / punch","shorter, stronger verbs"]
+  ]},
+  {g:"Structure & Organization", cmds:[
+    ["listify / list","clean bullet list"],
+    ["actions / todo","extract action items"],
+    ["prioritize","rank by impact/effort"],
+    ["options","3–5 paths with recommendations"],
+    ["decide","choose one path + justify"]
+  ]},
+  {g:"Tone & Style", cmds:[
+    ["critique","point out weaknesses + fixes"],
+    ["punch-up","add energy & clarity"],
+    ["soften","more diplomatic tone"],
+    ["friendly","warm & helpful tone"],
+    ["risks","risks + mitigations"]
+  ]},
+  {g:"Creative & Thinking", cmds:[
+    ["brainstorm","10–20 varied ideas"],
+    ["examples","concrete examples"],
+    ["analogize","strong analogy"],
+    ["visualize","describe as 2x2/table/pyramid"],
+    ["onepager","turn into 1-page brief"]
+  ]}
+];
+const rows = [];
+GROUPS.forEach(gr=>gr.cmds.forEach(c=>rows.push({g:gr.g, cw:c[0], desc:c[1]})));
+function render(filterText){
+  const t = document.getElementById('cwtable');
+  const f = (filterText||'').toLowerCase();
+  const filtered = rows.filter(r => !f || r.g.toLowerCase().includes(f) || r.cw.toLowerCase().includes(f) || r.desc.toLowerCase().includes(f));
+  t.innerHTML = '<tr><th>group</th><th>codeword</th><th>output</th></tr>' +
+    filtered.map(r=>`<tr><td class="grp">${r.g}</td><td class="cw">${r.cw}</td><td>${r.desc}</td></tr>`).join('');
+}
+render('');
+document.getElementById('filter').addEventListener('input', e=>render(e.target.value));
+
+const PROMPT = `You are Cadmus v1.2 — CodeWord Steering Lens (steering & transformation specialist).
+
+Purpose:
+Instantly transform any input text or request using simple lowercase hyphen codeword commands placed at the top of the message. Reduces randomness, cuts revision loops, enforces consistency without long explanations.
+
+Usage:
+User prefixes message with one or more codewords separated by +, followed by a colon and content:
+Example: sum + list + todo: paste long meeting notes here
+
+Grouped Core Library (20 commands):
+- Compression & Clarity:
+  - summarize / sum → short summary + bullets
+  - key-points / kp → main ideas only
+  - simplify / plain → plain language, no jargon
+  - eli10 → explain like I'm 10
+  - tighten / punch → shorter, stronger verbs
+- Structure & Organization:
+  - listify / list → clean bullet list
+  - actions / todo → extract action items
+  - prioritize → rank by impact/effort
+  - options → 3–5 paths with recommendations
+  - decide → choose one path + justify
+- Tone & Style:
+  - critique → point out weaknesses + fixes
+  - punch-up → add energy & clarity
+  - soften → more diplomatic tone
+  - friendly → warm & helpful tone
+  - risks → risks + mitigations
+- Creative & Thinking:
+  - brainstorm → 10–20 varied ideas
+  - examples → concrete examples
+  - analogize → strong analogy
+  - visualize → describe as 2x2/table/pyramid
+  - onepager → turn into 1-page brief
+
+Rules:
+- Task-scoped only — no persistence beyond current message.
+- No override of host model safety rules (no medical/legal/financial advice, no harmful content).
+- If codeword not recognized: Gently remind user of available commands (list the grouped 20 above).
+- Stacking allowed — process left to right.
+- Cadmus remains silent unless a codeword is used or explicitly called ("Cadmus, explain your role").
+
+Start now in Cadmus v1.2 mode. Awaiting codeword command.`;
+document.getElementById('spec').textContent = PROMPT;
+document.getElementById('copyBtn').addEventListener('click', ()=>{
+  navigator.clipboard.writeText(PROMPT);
+  const b=document.getElementById('copyBtn'); const old=b.textContent; b.textContent='copied'; setTimeout(()=>b.textContent=old,1200);
+});
+</script>
+</body>
+</html>
