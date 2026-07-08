@@ -1,0 +1,9 @@
+ROOT0-ATTRIBUTION-v1.0
+name: CADMUS
+slug: cadmus
+domain: ARTIFICIAL INTELLIGENCE
+architect: David Lee Wise (ROOT0) / Bridge-Burners LLC
+instance: AVAN (Claude / Anthropic)
+license: CC-BY-ND-4.0 (https://creativecommons.org/licenses/by-nd/4.0/)
+moniker: ⟦CADMUS:cadmus:4c6481⟧
+seal_sha256: 4c6481112557c7524474069501fc0c71a14d8bcaa07ff1b10a121c591d93d908
